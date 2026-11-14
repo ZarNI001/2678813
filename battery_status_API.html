@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Battery Status API</h2>
+    <button onclick="checkBattery()">Check Battery</button>
+    <p id="result"></p>
+
+    <script>
+      function checkBattery() {
+        if (!navigator.getBattery) {
+          document.getElementById("result").innerText =
+            "Battery Status API is not supported in this browser.";
+          return;
+        }
+        navigator.getBattery().then(function (battery) {
+          let batteryLevel = battery.level * 100; // Convert to percentage
+          let chargingStatus = battery.charging;
+          document.getElementById("result").innerHTML =
+            "Battery Level: " +
+            batteryLevel +
+            "%<br>" +
+            "Charging: " +
+            chargingStatus;
+        });
+      }
+    </script>
+  </body>
+</html>
